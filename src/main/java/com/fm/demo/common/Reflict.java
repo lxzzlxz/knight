@@ -12,16 +12,15 @@ public class Reflict {
     // 通过反射，将结果以map形式返回
     private Map<String, Object> reflect(Object o)
             throws ClassNotFoundException, IllegalArgumentException, IllegalAccessException {
-        String className1 = o.getClass().getName();
-        Class clazz = Class.forName(className1);
-        Object obj = o;
+        String className = o.getClass().getName();
+        Class clazz = Class.forName(className);
         Map<String, Object> result = new HashMap<String, Object>();
         // 获取对象属性
         Field[] fields = clazz.getDeclaredFields();
         for (Field field : fields) {
             field.setAccessible(true);// 私有属性设置访问权限
             String name = field.getName();
-            Object resultValue = field.get(obj);
+            Object resultValue = field.get(o);
             result.put(name, resultValue);
         }
         return result;
