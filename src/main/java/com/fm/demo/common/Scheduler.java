@@ -16,10 +16,10 @@ public class Scheduler {
         @Scheduled(initialDelay=1000, fixedDelay=3000)：第一次延迟1秒执行，然后在上一次执行完毕时间点3秒再次执行；
         @Scheduled(cron="* * * * * ?")：按cron规则执行；
      */
-    @Scheduled(fixedRate = 2000)
-    public void testTasks() {
-        System.out.println("定时任务执行时间：" + dateFormat.format(new Date()));
-    }
+    // @Scheduled(fixedRate = 2000)
+    // public void testTasks() {
+    //     System.out.println("定时任务执行时间：" + dateFormat.format(new Date()));
+    // }
 
     //每天3：05执行
     /**

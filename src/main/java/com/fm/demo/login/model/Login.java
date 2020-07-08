@@ -1,17 +1,16 @@
 package com.fm.demo.login.model;
-
 import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
 import lombok.Data;
-
 @Entity(name = "T_SYS_LOGIN")
 @Data
 public class Login {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     @Column(name = "user_name", nullable = false)
     private String username;
