@@ -35,7 +35,7 @@ public class TokenController {
         private String password;
         private String clientType;
     }
-    @PostMapping("/login")
+    @PostMapping("/tokens")
     @ResponseStatus(HttpStatus.CREATED)
     @Transactional
     public TokenVO login(@RequestBody LoginRequestBody body, HttpServletRequest request) {
