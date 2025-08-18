@@ -1,0 +1,116 @@
+# ========== 基础配置 ==========
+spring:
+  application:
+    name: auth  # 应用服务名（注册到Nacos的服务ID）
+
+  # ========== Jackson配置 ==========
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss  # 统一日期格式
+    time-zone: Asia/Shanghai  # 使用标准时区标识（替代GMT+8）
+    default-property-inclusion:   # 忽略字段
+
+  # ========== 数据源配置 ==========
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource  # 显式指定数据源类型
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/crec_knight?useUnicode=true&characterEncoding=utf8&useSSL=false&allowMultiQueries=true&serverTimezone=Asia/Shanghai
+    username: root
+    password: ${DB_PASSWORD:Lxzzlxz5@}  # 密码建议通过环境变量注入
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+
+# ========== Redis配置 ==========
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD:}
+      database: 0
+      lettuce:
+        shutdown-timeout: 100ms
+
+  # ========== Nacos配置 ==========
+  cloud:
+    nacos:
+      discovery:
+        #server-addr: ${NACOS_ADDR:127.0.0.1:8848}
+        server-addr: ${119.45.93.113:8848}
+        #namespace: ${NACOS_NAMESPACE:public}
+        #group: ${NACOS_GROUP:DEFAULT_GROUP}
+        #cluster-name: ${NACOS_CLUSTER:DEFAULT}
+        #ip: ${POD_IP:}  # Kubernetes场景使用
+        heart-beat-interval: 5000
+        heart-beat-timeout: 15000
+
+
+# ========== 服务器配置 ==========
+server:
+  port: 8092
+  servlet:
+    context-path: /
+    session:
+      timeout: 1800s  # 与session.expire保持一致
+  compression:
+    enabled: true
+    mime-types: application/json,application/xml,text/html,text/xml,text/plain
+
+# ========== 会话配置 ==========
+session:
+  domain: fm.demo
+  expire: 1800  # 单位：秒（与server.servlet.session.timeout同步）
+
+# ========== MyBatis配置 ==========
+mybatis:
+  mapper-locations: classpath*:com/fm/demo/**/dao/*Dao.xml
+  type-aliases-package: com.fm.demo.**.entity
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+    lazy-loading-enabled: true
+
+# ========== 熔断配置 ==========
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 20000
+          strategy: THREAD  # 显式声明隔离策略
+  threadpool:
+    default:
+      coreSize: 10
+      maximumSize: 20
+      allowMaximumSizeToDivergeFromCoreSize: true
+
+# ========== Feign配置 ==========
+feign:
+  hystrix:
+    enabled: true
+  client:
+    config:
+      default:
+        connectTimeout: 3000
+        readTimeout: 20000
+        loggerLevel: basic
+  compression:
+    request:
+      enabled: true
+      mime-types: text/xml,application/xml,application/json
+      min-request-size: 2048
+    response:
+      enabled: true
+
+# ========== 日志配置 ==========
+logging:
+  level:
+    root: INFO
+    com.fm.demo: DEBUG  # 替换为实际包名
+    org.springframework.cloud.openfeign: DEBUG
+    com.netflix.hystrix: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
