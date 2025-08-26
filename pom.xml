@@ -82,8 +82,6 @@
 			<version>8.3.0</version> <!-- 最新驱动 -->
 			<scope>runtime</scope>
 		</dependency>
-
-		<!-- 可选：添加Spring Security（如需） -->
 		<dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
