@@ -23,17 +23,20 @@ spring:
       idle-timeout: 600000
       max-lifetime: 1800000
   # ========== Nacos配置 ==========
+  config:
+    import: "nacos:${spring.application.name}.yml"  # 从Nacos加载当前应用的配置
   cloud:
     nacos:
       discovery:
-        server-addr: "119.45.93.113:8848"  # 直接使用值，或使用正确的占位符如 ${NACOS_ADDR:default:8848}
-        heart-beat-timeout: 15000
-        heart-beat-interval: 5000
-        #server-addr: ${NACOS_ADDR:127.0.0.1:8848}
-        #namespace: ${NACOS_NAMESPACE:public}
-        #group: ${NACOS_GROUP:DEFAULT_GROUP}
-        #cluster-name: ${NACOS_CLUSTER:DEFAULT}
-        #ip: ${POD_IP:}  # Kubernetes场景使用
+        server-addr: 119.45.93.113:8848 # 你的Nacos服务器地址
+        namespace: public # 命名空间ID
+        group: DEFAULT_GROUP
+        username: nacos # 如果有认证
+        password: nacos # 如果有认证
+        service: ${spring.application.name} # 服务名
+        port: 8092 # 应用端口
+        register-enabled: false
+
   # ========== Redis配置 ==========
   data:
     redis:
@@ -51,10 +54,10 @@ spring:
 
 # ========== MyBatis-plus配置 ==========
 mybatis-plus:
-  mapperLocations: classpath*:com/fm/demo/**/dao/*Dao.xml
+  mapperLocations: classpath:com/fm/knight/dao/*Dao.xml
   configuration:
     map-underscore-to-camel-case: true
-
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 # ========== 服务器配置 ==========
 server:
   port: 8092

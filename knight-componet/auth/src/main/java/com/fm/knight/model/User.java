@@ -4,50 +4,23 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Arrays;
-import java.util.Date;
-
-
-import jakarta.persistence.*;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.fm.knight.knight.model.BaseLamModel;
 import lombok.*;
-import org.hibernate.annotations.DynamicUpdate;
-
-@Entity
-@Table(name = "TPL_USER_T")
-@DynamicUpdate
 @Data
+@TableName("TPL_USER_T") // MyBatis-Plus 注解
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class User {
-    @Id
-    @Column(length = 20, nullable = false)
+public class User extends BaseLamModel {
     private String userName;
-    @Column(length = 20, nullable = false)
     private String fullName;
-    @Column(length = 1, nullable = false)
-    private long gender;
-    @Column
-    private String avatar;
-    @Column
-    private String tel;
-    @Column
-    private String email;
-    @Column(length = 1, nullable = false)
-    private long state;
-    @Lob
-    @Column(nullable = false)
     private byte[] pwd;
-    @Lob
-    @Column(nullable = false)
     private byte[] salt;
-    @Column(length = 200)
-    private String comments;
-    @Column
-    private String createUser;
-    @Column(nullable = false)
-    private Date createDate;
-    @Column(columnDefinition = "date")
-    private Date lastUpdatePwdDate;
+    private String email;
+    private String phone;
+    private long state;
 
     public boolean checkPassword(String password) {
         return Arrays.equals(hashPassword(salt, password), pwd);
@@ -79,5 +52,4 @@ public class User {
             throw new RuntimeException();
         }
     }
-
 }

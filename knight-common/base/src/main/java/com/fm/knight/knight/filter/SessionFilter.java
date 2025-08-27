@@ -21,7 +21,7 @@ import java.security.MessageDigest;
 
 @Component
 @ServletComponentScan
-@WebFilter(filterName = "sessionFilter", urlPatterns = "/*")
+@WebFilter(filterName = "customSessionFilter", urlPatterns = "/*")
 public class SessionFilter implements Filter {
     private static final Logger log = LoggerFactory.getLogger(SessionFilter.class);
     private Boolean isServiceNameInit = false;

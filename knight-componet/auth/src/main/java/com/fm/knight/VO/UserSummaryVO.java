@@ -16,8 +16,6 @@ public class UserSummaryVO {
     public UserSummaryVO(@NonNull User user) {
         this.username = user.getUserName();
         this.name = user.getFullName();
-        this.gender = user.getGender();
-        this.avatar = user.getAvatar();
         this.state = user.getState();
     }
 }

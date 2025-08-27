@@ -17,7 +17,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BaseLamModel {
-    @Schema(description = "回收商结算单确认表id")
+    @Schema(description = "id")
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
     @Schema(description = "创建时间")
