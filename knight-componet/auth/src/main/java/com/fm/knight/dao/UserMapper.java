@@ -4,7 +4,9 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.fm.knight.model.User;
 import org.apache.ibatis.annotations.Mapper;
 
-// 确保使用最新的MyBatis-Plus注解方式
+/**
+ * @author 刘泽民
+ */
 @Mapper
-public interface UserDao extends BaseMapper<User> {
+public interface UserMapper extends BaseMapper<User> {
 }

@@ -31,27 +31,25 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class PreFilter implements GatewayFilter, Ordered {
     private static final Logger log = LoggerFactory.getLogger(PreFilter.class);
     private static final ObjectMapper objectMapper = new ObjectMapper();
-
-    private final AtomicBoolean isServiceNameInit = new AtomicBoolean(false);
-
-    @Value("${spring.application.name}")
-    private String serviceName;
-
-    @Value("${session.domain}")
-    private String authDomain;
-
+    private static final List<String> ALLOWED_URIS = Arrays.asList("/auth/login", "/public/api");
+    private static final List<String> IGNORED_URIS = Arrays.asList("/swagger", "/v3/api-docs", "/webjars/");
     /**
      * service 标识
      */
     private static String serviceKey;
-
-    private static final List<String> ALLOWED_URIS = Arrays.asList("/auth/login", "/public/api");
-    private static final List<String> IGNORED_URIS = Arrays.asList("/swagger", "/v3/api-docs", "/webjars/");
-
+    private final AtomicBoolean isServiceNameInit = new AtomicBoolean(false);
     private final AuthFeignClient authFeignClient;
+    @Value("${spring.application.name}")
+    private String serviceName;
+    @Value("${session.domain}")
+    private String authDomain;
 
     public PreFilter(AuthFeignClient authFeignClient) {
         this.authFeignClient = authFeignClient;
+    }
+
+    public static String getServiceKey() {
+        return serviceKey;
     }
 
     @Override
@@ -265,9 +263,5 @@ public class PreFilter implements GatewayFilter, Ordered {
             }
             return Mono.empty();
         }).subscribeOn(Schedulers.boundedElastic()).subscribe();
-    }
-
-    public static String getServiceKey() {
-        return serviceKey;
     }
 }

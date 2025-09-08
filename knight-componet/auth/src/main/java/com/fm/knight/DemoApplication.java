@@ -8,10 +8,10 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
 @EnableScheduling
+@MapperScan("com.fm.knight.dao") // 确保路径正确
 @EnableDiscoveryClient
-@MapperScan(basePackages = {"com.fm.knight.dao"}) // 确保路径正确
 public class DemoApplication {
-	public static void main(String[] args) {
-		SpringApplication.run(DemoApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(DemoApplication.class, args);
+    }
 }

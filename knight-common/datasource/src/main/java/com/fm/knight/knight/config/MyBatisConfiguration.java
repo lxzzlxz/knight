@@ -38,7 +38,7 @@ public class MyBatisConfiguration {
         ds.setDriverClassName(env.getProperty("spring.datasource.driver"));
 
         // 初始化时建立连接个数
-        ds.setInitialSize(Integer.parseInt(Objects.requireNonNull(env.getProperty("spring.datasource.initsize"))));
+        /*ds.setInitialSize(Integer.parseInt(Objects.requireNonNull(env.getProperty("spring.datasource.initsize"))));
 
         // 连接池最大连接数
         ds.setMaxActive(Integer.parseInt(Objects.requireNonNull(env.getProperty("spring.datasource.maxActive"))));
@@ -69,7 +69,7 @@ public class MyBatisConfiguration {
         ds.setTestWhileIdle(Boolean.parseBoolean(env.getProperty("spring.datasource.testWhileIdle")));
 
         // 1,Destroy线程检测连接的间隔时间 2,testWhileIdle的判断依据
-        ds.setTimeBetweenEvictionRunsMillis(Long.parseLong(Objects.requireNonNull(env.getProperty("spring.datasource.timeBetweenEvictionRunsMillis"))));
+        ds.setTimeBetweenEvictionRunsMillis(Long.parseLong(Objects.requireNonNull(env.getProperty("spring.datasource.timeBetweenEvictionRunsMillis"))));*/
 
         try {
             // 通过别名的方式配置扩展插件，常用插件有

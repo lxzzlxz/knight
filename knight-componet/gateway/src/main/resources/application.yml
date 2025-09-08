@@ -1,29 +1,31 @@
 spring:
   application:
     name: gateway
-  cloud:
-    gateway:
-      routes:
-        # 认证服务路由
-        - id: auth-service
-          uri: lb://AUTH-SERVICE
-          # 断言，断言为真，则路由匹配
-          predicates:
-            - Path=/api/auth/**
-          # 过滤器
-          filters:
-            - StripPrefix=1
-            - AddResponseHeader=X-Response-Default-Foo, Default-Bar
-
-        # 其他服务路由
-        - id: user-service
-          uri: lb://USER-SERVICE
-          predicates:
-            - Path=/api/users/**
   session:
     domain: legao.crec
     expire: 1800          # 30分钟（单位：秒）
     app-expire: 2592000   # 30天（单位：秒）
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            # 认证服务路由
+            - id: auth-service
+              uri: lb://AUTH-SERVICE
+              # 断言，断言为真，则路由匹配
+              predicates:
+                - Path=/api/auth/**
+              # 过滤器
+              filters:
+                - StripPrefix=1
+                - AddResponseHeader=X-Response-Default-Foo, Default-Bar
+
+            # 其他服务路由
+            - id: user-service
+              uri: lb://USER-SERVICE
+              predicates:
+                - Path=/api/users/**
 
 server:
   port: 8080
@@ -32,9 +34,6 @@ server:
 
 #网关路由配置
 #为zuul设置一个公共的前缀
-
-
-
 
 custom:
   ignore-check: .*api-docs.*,/turnover/demand/v1/findHallPagedList/.*,/turnover/demand/v1/findList,/recovery/demand/v1/query-demand-Info, .*swagger.*, /security/login, /security/adminLogin, /security/logout, /system/userMessage/.*/findCount,  /pay/hxpay/v1/asyncNotify, /security/validImageCode,  /security/register, /security/.*/register, /security/forgetPassword, /security/getImageCode, /security/app/login, /sms/sms/.*, /information/package/.*, /information/publicityHits/save, /information/static/.*, /information/information/.*/findPagedList/.*, /information/information/.*/findList,  /information/banner/.*/findPagedList/.*, /information/banner/.*,  /supplier/supplier/v1/getFullDataList/.*, /supplier/supplier/.*/findPagedList/.*, /supplier/supplier/.*/findList, /demand/demand/.*/findPagedList/.*, /demand/demand/v1/findPagedTradeList.*,  /demand/demand/.*/findList,  /supplier/supplier/.*/findPagedList/.*, /supplier/supplier/.*/findList, /demand/demandOrder/.*/findPagedList/.*, /demand/demandOrder/.*/findList, /merchanical/merchanical/.*/findList, /merchanical/merchanical/.*/findPagedList/.*, /merchanical/merchanicalCategory/.*, /demand/demandInfo/.*, .*exportApplyHtml, .*exportApply, /system/region/.*, /system/systemnotice/.*/list, /system/platformHistory/list, /system/platformHonor/list, /system/platformHonor/findPagedList/.*, /bidding/bidding/v1/findPagedList/.*, /bidding/bidding/v1/findInfo/.*, /bidding/bidding/v1/findPublicResultInfo/.*, /bidding/bidding/v1/findPublicResultPagedList/.*, /system/platformHonor/findPagedList/.*, /system/platformIntroduction/list, /merchanical/merchanical/v1/findFrontPagedList/.*, /merchanical/merchanical/v1/findFrontDetail,/information/publicity/findPublicity, /information/publicity/getInfo/.*, /merchanical/logistics/v1/findNoLoginPagedList/.*, /information/information/v1/info/.*,/information/safetyRuleView/insert,/information/safetyRule/frontPagedList/.* ,/file/file/v1/mark,/system/platform/v1/themeStatus,/recruitment/post/v1/firstHomePagedList/.*,/recruitment/resume/v1/firstHomePagedList/.*,/recruitment/candidateNotice/v1/firstHomePagedList/.*,/recruitment/job/v1/findList,/recovery/demand/v1/check-money,/merchanical/ilep/.*,/security/yzwUserLogin,/insurance/beijingPingan/genTicket,/insurance/beijingPingan/updBT,/demand/demandCompanyAdmin/v1/queryUserOrgInfo,/userRoleProgram/v1/notLoginFindList,/lease/jinkong/genAuthTicket,/lease/jinkong/getDemanderInfo,/lease/jinkong/syncLeaseInfo,/lease/jinkong/syncLeaseInfoProcessStatus,/lease/jinkong/syncLeaseInfoTransactionStatus

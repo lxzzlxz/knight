@@ -8,13 +8,14 @@ public interface IAuthService {
 
     /**
      * 单向认证
+     *
      * @param domain
      * @param sessionId
      * @return
      */
-    Mono<Map<String,Object>> check(String domain, String sessionId);
+    Mono<Map<String, Object>> check(String domain, String sessionId);
 
-  /*  *//**
+    /*  *//**
      * 登录
      * @param domain
      * @param sessionId

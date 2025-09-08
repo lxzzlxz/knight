@@ -7,8 +7,6 @@
 	<modules>
 		<module>knight-common</module>
 		<module>knight-componet</module>
-		<module>knight-componet/auth</module>
-		<module>knight-componet/gateway</module>
 	</modules>
 
 	<!-- 升级到最新的Spring Boot 3.x稳定版 -->
@@ -21,7 +19,7 @@
 
 	<groupId>com.fm</groupId>
 	<artifactId>demo</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1-20250908</version>
 	<name>demo</name>
 	<description>Demo project for Spring Boot</description>
 
@@ -93,7 +91,7 @@
 		<dependency>
 			<groupId>com.baomidou</groupId>
 			<artifactId>mybatis-plus-boot-starter</artifactId>
-			<version>3.5.7</version>
+			<version>3.5.8</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>mybatis-plus-generator</artifactId>
@@ -113,7 +111,16 @@
 			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
 			<version>2.5.0</version> <!-- 替换为稳定版 -->
 		</dependency>
-
+		<dependency>
+			<groupId>org.mybatis.spring.boot</groupId>
+			<artifactId>mybatis-spring-boot-starter</artifactId>
+			<version>3.0.5</version> <!-- 使用最新稳定版 -->
+		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>1.9.22</version> <!-- 或用最新版本 -->
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -171,16 +178,6 @@
 			<id>aliyun-public</id>
 			<name>Aliyun Maven Public</name>
 			<url>https://maven.aliyun.com/repository/public</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>central</id>
-			<url>https://repo.maven.apache.org/maven2</url>
 			<releases>
 				<enabled>true</enabled>
 			</releases>

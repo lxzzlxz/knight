@@ -5,7 +5,7 @@
     <parent>
         <artifactId>demo</artifactId>
         <groupId>com.fm</groupId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>0.0.1-20250908</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 

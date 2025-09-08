@@ -1,5 +1,7 @@
 # ========== 基础配置 ==========
 spring:
+  main:
+    allow-bean-definition-overriding: true
   application:
     name: auth  # 应用服务名（注册到Nacos的服务ID）
 
@@ -11,11 +13,12 @@ spring:
 
   # ========== 数据源配置 ==========
   datasource:
-    type: com.zaxxer.hikari.HikariDataSource  # 显式指定数据源类型
+    #type: com.zaxxer.hikari.HikariDataSource  # 显式指定数据源类型
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/crec_knight?useUnicode=true&characterEncoding=utf8&useSSL=false&allowMultiQueries=true&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://119.45.93.113:3306/crec_knight?useUnicode=true&characterEncoding=utf8&useSSL=false&allowMultiQueries=true&serverTimezone=Asia/Shanghai
     username: root
-    password: ${DB_PASSWORD:Lxzzlxz5@}  # 密码建议通过环境变量注入
+    #password: ${DB_PASSWORD:Lxzzlxz5@}  # 密码建议通过环境变量注入
+    password: Lxzzlxz5@
     hikari:
       maximum-pool-size: 10
       minimum-idle: 5
@@ -29,8 +32,8 @@ spring:
     nacos:
       discovery:
         server-addr: 119.45.93.113:8848 # 你的Nacos服务器地址
-        namespace: public # 命名空间ID
-        group: DEFAULT_GROUP
+        #namespace: public # 命名空间ID
+        #group: DEFAULT_GROUP
         username: nacos # 如果有认证
         password: nacos # 如果有认证
         service: ${spring.application.name} # 服务名
@@ -47,7 +50,7 @@ spring:
       lettuce:
         shutdown-timeout: 100ms
 
-# ========== 会话配置 ==========
+  # ========== 会话配置 ==========
   session:
     domain: fm.demo
     expire: 1800  # 单位：秒（与server.servlet.session.timeout同步）

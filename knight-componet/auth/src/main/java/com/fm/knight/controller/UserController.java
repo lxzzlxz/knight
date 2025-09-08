@@ -1,8 +1,8 @@
 package com.fm.knight.controller;
 
-import com.fm.knight.common.ApiBaseController;
+import org.springframework.web.bind.annotation.RestController;
 
-@ApiBaseController
+@RestController
 public class UserController {
 
 }

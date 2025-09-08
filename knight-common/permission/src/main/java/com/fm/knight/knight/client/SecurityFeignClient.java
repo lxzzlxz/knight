@@ -2,9 +2,7 @@ package com.fm.knight.knight.client;
 
 import com.fm.knight.knight.helper.RHelper;
 import com.fm.knight.knight.helper.ResultMapHelper;
-import com.fm.knight.knight.knight.model.*;
 import com.fm.knight.knight.model.*;
-import com.fm.knight.model.*;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestBody;

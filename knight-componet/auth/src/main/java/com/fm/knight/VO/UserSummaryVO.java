@@ -1,9 +1,9 @@
 package com.fm.knight.VO;
 
 import com.fm.knight.model.User;
-
 import lombok.Getter;
 import lombok.NonNull;
+
 @Getter
 public class UserSummaryVO {
     private String username;
